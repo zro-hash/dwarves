@@ -1,6 +1,53 @@
 <!DOCTYPE html>
 <html>
+<head>
+  <meta charset="utf-8">
+  <title>Offline Unity Game</title>
+  <style>
+    html, body {
+      margin: 0;
+      height: 100%;
+      background: black;
+      overflow: hidden;
+    }
+    canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+  </style>
+</head>
+<body>
 
-<iframe src="https://www.crazygames.com/embed/dwarves-glory-death-and-loot" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0"></iframe>
+<canvas id="unity-canvas"></canvas>
 
-</html><script defer src="https://static.itch.io/htmlgame.js" type="text/javascript"></script>
+<!-- SDK STUB -->
+<script>
+window.CrazyGames = {
+  SDK: {
+    init: () => Promise.resolve(),
+    requestAd: () => Promise.resolve(),
+    gameplayStart: () => {},
+    gameplayStop: () => {},
+    happytime: () => {},
+  }
+};
+window.crazygames = window.CrazyGames;
+</script>
+
+<script src="Build/crazygames.loader.js"></script>
+
+<script>
+createUnityInstance(document.querySelector("#unity-canvas"), {
+  dataUrl: "", // IMPORTANT: no data file
+  frameworkUrl: "Build/ceeb4a89c5eb2a1d345240f447d48240.js",
+  codeUrl: "Build/7cd5c15a2555669cd18b3074a5010e74.wasm",
+  streamingAssetsUrl: "StreamingAssets",
+  companyName: "Offline",
+  productName: "Game",
+  productVersion: "1.0"
+});
+</script>
+
+</body>
+</html>
